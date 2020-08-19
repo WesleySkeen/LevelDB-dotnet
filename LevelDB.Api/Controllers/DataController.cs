@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace LevelDB.Api.Controllers
 {
@@ -14,18 +13,10 @@ namespace LevelDB.Api.Controllers
             _localDb = localDb;
         }
 
-        [HttpPost]
-        public void Post()
-        {
-            populatePlayers();
-        }
-
         [HttpGet]
         [Route("")]
         public Player Get()
         {
-            populatePlayers();
-
             return _localDb.Get("Bruno");
         }
 
@@ -34,18 +25,6 @@ namespace LevelDB.Api.Controllers
         public Player Get(string id)
         {
             return _localDb.Get(id);
-        }
-
-        private void populatePlayers()
-        {
-            var players = new List<Player>
-            {
-                new Player("Bruno", "Fernandez"),
-                new Player("Anthony", "Martial"),
-                new Player("Marcus", "Rashford")
-            };
-
-            _localDb.Put(players);
         }
     }
 }
